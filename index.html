@@ -11,13 +11,13 @@
 
 		<title>CRUD Application</title>
 		
-		<!-- Bootstrap -->
+		<!-- Bootstrap CSS-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 		<!-- JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		
-		<!-- Bootstrap -->
+		<!-- Bootstrap JS-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 		<!-- Font Awesome -->
@@ -27,6 +27,16 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 		<style type="text/css">
+			body {
+    			background: url(images/bg-8.png) no-repeat center center fixed;
+    			-webkit-background-size: cover;
+    			-moz-background-size: cover;
+    			-o-background-size: cover;
+    			background-size: cover;
+			}
+			table{
+				background-color: white;
+			}
 			th,td{
 				text-align: center;
 			}
@@ -39,13 +49,52 @@
 		<div class="container">
 			<!-- Heading -->
 			<hr>
+		  	<!--
+		  	<div class="row">
+		  		<div class="col-sm-4">
+		  			<h1 style="color: #33FF99">CRUD<sub>&reg;</sub></h1>
+		  		</div>
+		  		<div class="col-sm-4">
+		  			<form action="" method="">
+						<div class="input-group">
+					    	<input type="text" class="form-control" placeholder="Search Users..">
+					    	<div class="input-group-btn">
+					      		<button class="btn btn-info" type="submit">
+					        		<i class="glyphicon glyphicon-search"></i>
+					      		</button>
+					    	</div>
+					  	</div>
+					</form>
+		  		</div>
+		  		<div class="col-sm-4">
+		  			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus-circle"></i> Add</button>
+		  		</div>
+		  	</div>
+		  	-->
+		  	
 		  	<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus-circle"></i> Add</button>
-		  	<h1>CRUD</h1>
+		  	<button type="button" class="btn btn-success btn-lg pull-right" data-toggle="modal" data-target="#myselfModal"><i class="fa fa-user"></i> Myself</button>
+		  	<h1 style="color: #33FF99">
+		  	<img src="images/angular.png" class="img-thumbnail" alt="" width="50" height="50">
+		  	AngularJs - CRUD<sub>&reg;</sub></h1>
+		  	<br>
+		  	<form action="" method="">
+				<div class="input-group">
+			    	<input type="text" class="form-control form-control-xs" placeholder="Search Users..">
+			    	<div class="input-group-btn">
+			      		<button class="btn btn-info" type="submit">
+			        		<i class="glyphicon glyphicon-search"></i>
+			      		</button>
+			    	</div>
+			  	</div>
+			</form>
 		  	<hr>
 		  	<!-- Heading -->
 
 		  	<!-- Main -->
-		  	<table class="table table-striped table-hover">
+		  	
+		  	<!-- Users table -->
+		  	<table class="table table-striped">
     			<thead>
       				<tr>
         				<th>Sl.</th>
@@ -90,8 +139,42 @@
         					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
         				</td>
       				</tr>
+      				<tr>
+        				<td>4.</td>
+        				<td>John Doe</td>
+        				<td>john@example.com</td>
+        				<td>
+        					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i> Edit</button>
+        				</td>
+        				<td>
+        					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
+        				</td>
+      				</tr>
+      				<tr>
+        				<td>5.</td>
+        				<td>John Doe</td>
+        				<td>john@example.com</td>
+        				<td>
+        					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i> Edit</button>
+        				</td>
+        				<td>
+        					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
+        				</td>
+      				</tr>
     			</tbody>
   			</table>
+
+  			<!-- Pagination -->
+  			<div class="col-md-4 col-sm-3 col-xs-2"></div>
+  			<ul class="pagination pagination-lg">
+				<li><a href="#"><<</a></li>
+				<li class="active"><a href="#">1</a></li>
+			  	<li><a href="#">2</a></li>
+			  	<li><a href="#">3</a></li>
+			  	<li><a href="#">4</a></li>
+			  	<li><a href="#">5</a></li>
+			  	<li><a href="#">>></a></li>
+			</ul>
 		  	<!-- Main -->
 
 		  	<!-- Modals -->
@@ -110,13 +193,13 @@
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="Name">Name:</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="name" placeholder="John Doe" required>
+										<input type="text" class="form-control" id="create_name" placeholder="John Doe" required>
 									</div>
 							  	</div>
 							  	<div class="form-group">
 							    	<label class="control-label col-sm-2" for="Email">Email:</label>
 							    	<div class="col-sm-10">
-							    		<input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+							    		<input type="email" class="form-control" id="create_email" placeholder="john@example.com" required>
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
@@ -140,20 +223,27 @@
 					<div class="modal-content">
 			  			<div class="modal-header">
 			    			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			    			<h4 class="modal-title">Edit Existing User.</h4>
+			    			<h4 class="modal-title">Modify User?</h4>
 			  			</div>
 			  			<div class="modal-body">
-			    			<form action="" method="">
+			    			<form action="" method="" class="form-horizontal">
 								<div class="form-group">
-									<label for="Name">Name:</label>
-							    	<input type="text" class="form-control" id="name">
+									<label class="control-label col-sm-2" for="Name">Name:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="edit_name" placeholder="John Doe" required>
+									</div>
 							  	</div>
 							  	<div class="form-group">
-							    	<label for="Email">Email:</label>
-							    	<input type="email" class="form-control" id="email">
+							    	<label class="control-label col-sm-2" for="Email">Email:</label>
+							    	<div class="col-sm-10">
+							    		<input type="email" class="form-control" id="edit_email" placeholder="john@example.com" required>
+							    	</div>
 							  	</div>
-							  	
-							  	<button type="submit" class="btn btn-success"><i class="fa fa-file"></i> Update</button>
+							  	<div class="form-group">
+							  		<div class="col-sm-offset-2 col-sm-10">
+							  			<button type="submit" class="btn btn-success"><i class="fa fa-wrench"></i> Update</button>
+							  		</div>
+							  	</div>
 							</form>
 			  			</div>
 			  			<div class="modal-footer">
@@ -162,6 +252,7 @@
 					</div>
 				</div>
 			</div>
+		  	
 		  	<!--Delete User Modal -->
 		  	<div id="deleteModal" class="modal fade" role="dialog">
 				<div class="modal-dialog">
@@ -169,14 +260,33 @@
 					<div class="modal-content">
 			  			<div class="modal-header">
 			    			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			    			<h4 class="modal-title">Delete User.</h4>
+			    			<h4 class="modal-title">Delete User?</h4>
 			  			</div>
 			  			<div class="modal-body">
 			  				<p style="color:red;">Are You Sure ?</p>
 			  			</div>
 			  			<div class="modal-footer">
-			    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Yes</button>
-			    			<button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-close"></i> No</button>
+			    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-frown-o"></i> Yes</button>
+			    			<button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-smile-o"></i> No</button>
+			  			</div>
+					</div>
+				</div>
+			</div>
+
+			<!--Myself Modal -->
+			<div id="myselfModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+			  			<div class="modal-header">
+			    			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			    			<h4 class="modal-title">Hello !</h4>
+			  			</div>
+			  			<div class="modal-body">
+			    			
+			  			</div>
+			  			<div class="modal-footer">
+			    			<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
 			  			</div>
 					</div>
 				</div>
