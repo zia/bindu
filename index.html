@@ -2,7 +2,9 @@
 
 <!-- Modals are containing the forms -->
 <!-- Pagination and searching will be implemented -->
-<!-- Body background image, table sorter will be added -->
+<!-- Table sorter will be added -->
+<!-- I'll add back end coding later -->
+<!-- Alert be like gmail alert -->
 
 <!DOCTYPE html>
 
@@ -10,9 +12,14 @@
 	<head>
 
 		<title>CRUD Application</title>
+		<meta charset="UTF-8">
 		
+		<!-- I've used CDN here.You can use your own for offline version. -->
 		<!-- Bootstrap CSS-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 		<!-- JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -20,11 +27,11 @@
 		<!-- Bootstrap JS-->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-		<!-- Font Awesome -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 		<!-- Angular -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+		<!-- CRUD.js -->
+		<script src="crud.js"></script>
 
 		<style type="text/css">
 			body {
@@ -44,52 +51,43 @@
 
 	</head>
 	
-	<body>
+	<body ng-app="myApp" ng-controller="myController">
 
 		<div class="container">
-			<!-- Heading -->
+			<!-- Header -->
 			<hr>
-		  	<!--
-		  	<div class="row">
-		  		<div class="col-sm-4">
-		  			<h1 style="color: #33FF99">CRUD<sub>&reg;</sub></h1>
-		  		</div>
-		  		<div class="col-sm-4">
-		  			<form action="" method="">
-						<div class="input-group">
-					    	<input type="text" class="form-control" placeholder="Search Users..">
-					    	<div class="input-group-btn">
-					      		<button class="btn btn-info" type="submit">
-					        		<i class="glyphicon glyphicon-search"></i>
-					      		</button>
-					    	</div>
-					  	</div>
-					</form>
-		  		</div>
-		  		<div class="col-sm-4">
-		  			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus-circle"></i> Add</button>
-		  		</div>
-		  	</div>
-		  	-->
-		  	
+			<!-- New user trigger -->
 		  	<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus-circle"></i> Add</button>
+
+		  	<!-- Myself trigger -->
 		  	<button type="button" class="btn btn-success btn-lg pull-right" data-toggle="modal" data-target="#myselfModal"><i class="fa fa-user"></i> Myself</button>
+
+		  	<!-- Heading -->
 		  	<h1 style="color: #33FF99">
-		  	<img src="images/angular.png" class="img-thumbnail" alt="" width="50" height="50">
-		  	AngularJs - CRUD<sub>&reg;</sub></h1>
+		  		<img src="images/angular.png" class="img-thumbnail" alt="logo" width="50" height="50">
+		  		AngularJs - CRUD<sub>&reg;</sub>
+		  	</h1>
 		  	<br>
+
+		  	<!-- Search form -->
 		  	<form action="" method="">
 				<div class="input-group">
-			    	<input type="text" class="form-control form-control-xs" placeholder="Search Users..">
+			    	<input type="text" class="form-control input-lg" placeholder="Search Users..">
 			    	<div class="input-group-btn">
-			      		<button class="btn btn-info" type="submit">
+			      		<button class="btn btn-info btn-lg" type="submit">
 			        		<i class="glyphicon glyphicon-search"></i>
 			      		</button>
 			    	</div>
 			  	</div>
 			</form>
 		  	<hr>
-		  	<!-- Heading -->
+		  	<!-- Header -->
+
+		  	<!-- Alert Box -->
+			<div class="alert alert-success alert-dismissable fade in" ng-if = "message">
+				<a href="#" class="close" ng-click="clearMessage()" aria-label="close">&times;</a>
+				<strong>Success!</strong> {{message}}
+			</div>
 
 		  	<!-- Main -->
 		  	
@@ -106,59 +104,15 @@
     			</thead>
     			
     			<tbody>
-      				<tr>
-        				<td>1.</td>
-        				<td>John Doe</td>
-        				<td>john@example.com</td>
+      				<tr ng-repeat='user in users'>
+        				<td>{{$index+1}}.</td>
+        				<td>{{user.name}}</td>
+        				<td>{{user.email}}</td>
         				<td>
-        					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i> Edit</button>
+        					<button type="button" ng-click="selectUser(user)" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i> Edit</button>
         				</td>
         				<td>
-        					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
-        				</td>
-      				</tr>
-      				<tr>
-        				<td>2.</td>
-        				<td>John Doe</td>
-        				<td>john@example.com</td>
-        				<td>
-        					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i> Edit</button>
-        				</td>
-        				<td>
-        					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
-        				</td>
-      				</tr>
-      				<tr>
-        				<td>3.</td>
-        				<td>John Doe</td>
-        				<td>john@example.com</td>
-        				<td>
-        					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i> Edit</button>
-        				</td>
-        				<td>
-        					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
-        				</td>
-      				</tr>
-      				<tr>
-        				<td>4.</td>
-        				<td>John Doe</td>
-        				<td>john@example.com</td>
-        				<td>
-        					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i> Edit</button>
-        				</td>
-        				<td>
-        					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
-        				</td>
-      				</tr>
-      				<tr>
-        				<td>5.</td>
-        				<td>John Doe</td>
-        				<td>john@example.com</td>
-        				<td>
-        					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i> Edit</button>
-        				</td>
-        				<td>
-        					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
+        					<button type="button" ng-click="selectUser(user)" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i> Delete</button>
         				</td>
       				</tr>
     			</tbody>
@@ -167,19 +121,20 @@
   			<!-- Pagination -->
   			<div class="col-md-4 col-sm-3 col-xs-2"></div>
   			<ul class="pagination pagination-lg">
-				<li><a href="#"><<</a></li>
+				<li><a href="#">Prev</a></li>
 				<li class="active"><a href="#">1</a></li>
 			  	<li><a href="#">2</a></li>
 			  	<li><a href="#">3</a></li>
 			  	<li><a href="#">4</a></li>
 			  	<li><a href="#">5</a></li>
-			  	<li><a href="#">>></a></li>
+			  	<li><a href="#">Next</a></li>
 			</ul>
 		  	<!-- Main -->
 
 		  	<!-- Modals -->
 		  	
 		  	<!--New User Modal -->
+		  	<!-- You can't add an empty user.If you wish to close the newmodal on saving a new instance, you can add data-dismiss in save button. -->
 			<div id="newModal" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 					<!-- Modal content-->
@@ -193,18 +148,18 @@
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="Name">Name:</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="create_name" placeholder="John Doe" required>
+										<input type="text" ng-model="newUser.name" class="form-control" id="create_name" placeholder="John Doe" required>
 									</div>
 							  	</div>
 							  	<div class="form-group">
 							    	<label class="control-label col-sm-2" for="Email">Email:</label>
 							    	<div class="col-sm-10">
-							    		<input type="email" class="form-control" id="create_email" placeholder="john@example.com" required>
+							    		<input type="email" ng-model="newUser.email" class="form-control" id="create_email" placeholder="john@example.com" required>
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
 							  		<div class="col-sm-offset-2 col-sm-10">
-							  			<button type="submit" class="btn btn-success"><i class="fa fa-file"></i> Save</button>
+							  			<button type="submit" class="btn btn-success" ng-click="saveUser()"><i class="fa fa-file"></i> Save</button>
 							  		</div>
 							  	</div>
 							</form>
@@ -217,6 +172,7 @@
 			</div>
 		  	
 		  	<!--Edit User Modal -->
+		  	<!-- To test update don't click on update button on editmodal.It'll reload the page and update will be lost.Just close the modal after editing an instance. -->
 		  	<div id="editModal" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 					<!-- Modal content-->
@@ -230,18 +186,18 @@
 								<div class="form-group">
 									<label class="control-label col-sm-2" for="Name">Name:</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="edit_name" placeholder="John Doe" required>
+										<input type="text" ng-model="clickedUser.name" class="form-control" id="edit_name" required>
 									</div>
 							  	</div>
 							  	<div class="form-group">
 							    	<label class="control-label col-sm-2" for="Email">Email:</label>
 							    	<div class="col-sm-10">
-							    		<input type="email" class="form-control" id="edit_email" placeholder="john@example.com" required>
+							    		<input type="email" ng-model="clickedUser.email" class="form-control" id="edit_email" required>
 							    	</div>
 							  	</div>
 							  	<div class="form-group">
 							  		<div class="col-sm-offset-2 col-sm-10">
-							  			<button type="submit" class="btn btn-success"><i class="fa fa-wrench"></i> Update</button>
+							  			<button type="submit" ng-click="updateUser()" class="btn btn-success"><i class="fa fa-wrench"></i> Update</button>
 							  		</div>
 							  	</div>
 							</form>
@@ -260,13 +216,13 @@
 					<div class="modal-content">
 			  			<div class="modal-header">
 			    			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			    			<h4 class="modal-title">Delete User?</h4>
+			    			<h4 class="modal-title">Delete {{clickedUser.name}}?</h4>
 			  			</div>
 			  			<div class="modal-body">
 			  				<p style="color:red;">Are You Sure ?</p>
 			  			</div>
 			  			<div class="modal-footer">
-			    			<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-frown-o"></i> Yes</button>
+			    			<button type="button" ng-click="deleteUser()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-frown-o"></i> Yes</button>
 			    			<button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-smile-o"></i> No</button>
 			  			</div>
 					</div>
@@ -283,7 +239,62 @@
 			    			<h4 class="modal-title">Hello !</h4>
 			  			</div>
 			  			<div class="modal-body">
-			    			
+			  				<div class="row">
+			  					<div class="col-sm-4">
+			  						<img src="images/myself_2.jpg" class="img-thumbnail" alt="Ziaur Rahman" width="200" height="200">
+			  					</div>
+			  					<div class="col-sm-8">
+			  						<p style="text-align: justify;">
+					    				The name is Ziaur Rahman (Zia). Currently unemployed (18 jan,2017).Grew up in a small town Khulna in Bangladesh.
+					    				Graduated on CS from United International University, Dhaka.
+					    				I was employed as a web developer in a tech startup named Flick Max (https://www.flickmax.net/) in Dhaka.I worked with codeigniter there. I did a local project too, developed back-end for a spinning mill named Salma Group (http://salmagroup.com.bd/) with codeigniter. I know PHP / MySQL, Codeigniter, Laravel, Database Design, HTML, CSS, JQuery, Bootstrap, AJAX and AngularJS. I know few basic networking twaeks and used to Linux OS either. I'm a COD fan, loves to read history (colonial and modern). I'm simple and kinda introvert.My social profiles are:
+					    			</p>
+									<div class="btn-group">
+										<!-- Facebook -->
+										<a href="http://www.facebook.com/zia363/" type="button" class="btn btn-primary btn-xs">
+											<i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook
+										</a>
+										<!-- Twitter -->
+										<a href="http://www.twitter.com/zia363/" type="button" class="btn btn-info btn-xs">
+											<i class="fa fa-twitter" aria-hidden="true"></i> Twitter
+										</a>
+										<!-- LinkedIn -->
+										<a href="https://www.linkedin.com/in/zia363" type="button" class="btn btn-primary btn-xs">
+											<i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin
+										</a>
+										<!-- GitHub -->
+										<a href="https://www.github.com/zia" type="button" class="btn btn-default btn-xs">
+											<i class="fa fa-github" aria-hidden="true"></i> Github
+										</a>
+										<!-- Website -->
+										<a href="#" type="button" class="btn btn-success btn-xs disabled">
+											<i class="fa fa-globe" aria-hidden="true"></i> Website
+										</a>
+									</div>
+									<!--
+					    			<ul class="list-group">
+										<li class="list-group-item">
+											<a href="http://www.facebook.com/zia363/">
+												<i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook
+											</a>
+										</li>
+										<li class="list-group-item">
+											<a href="http://www.twitter.com/zia363/">
+												<i class="fa fa-twitter" aria-hidden="true"></i> Twitter
+											</a>
+										</li>
+										<li class="list-group-item">
+											<a href="https://www.linkedin.com/in/zia363">
+												<i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin
+											</a>
+										</li>
+										<li class="list-group-item disabled">
+											<i class="fa fa-globe" aria-hidden="true"></i> Website
+										</li>
+									</ul>
+									-->
+			  					</div>
+			  				</div>
 			  			</div>
 			  			<div class="modal-footer">
 			    			<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
