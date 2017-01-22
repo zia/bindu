@@ -1,7 +1,7 @@
 <!-- Hello I'm Zia, a web developer from khulna. If you like my project you can contact me. I'm available to be hired.Thanks in advance. -->
-
+<!-- Searching is easy ! -->
 <!-- Modals are containing the forms -->
-<!-- Pagination and searching will be implemented -->
+<!-- Pagination will be implemented -->
 <!-- Table sorter will be added -->
 <!-- I'll add back end coding later -->
 <!-- Alert be like gmail alert -->
@@ -72,7 +72,7 @@
 		  	<!-- Search form -->
 		  	<form action="" method="">
 				<div class="input-group">
-			    	<input type="text" class="form-control input-lg" placeholder="Search Users..">
+			    	<input type="text" class="form-control input-lg" placeholder="Search Users.." ng-model = "searchUser">
 			    	<div class="input-group-btn">
 			      		<button class="btn btn-info btn-lg" type="submit">
 			        		<i class="glyphicon glyphicon-search"></i>
@@ -84,7 +84,7 @@
 		  	<!-- Header -->
 
 		  	<!-- Alert Box -->
-			<div class="alert alert-success alert-dismissable fade in" ng-if = "message">
+			<div class="alert alert-success alert-dismissable" ng-if = "message">
 				<a href="#" class="close" ng-click="clearMessage()" aria-label="close">&times;</a>
 				<strong>Success!</strong> {{message}}
 			</div>
@@ -104,7 +104,7 @@
     			</thead>
     			
     			<tbody>
-      				<tr ng-repeat='user in users'>
+      				<tr ng-repeat='user in users | filter:searchUser'>
         				<td>{{$index+1}}.</td>
         				<td>{{user.name}}</td>
         				<td>{{user.email}}</td>
