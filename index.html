@@ -1,10 +1,8 @@
 <!-- Hello I'm Zia, a web developer from khulna. If you like my project you can contact me. I'm available to be hired.Thanks in advance. -->
-<!-- Searching is easy ! -->
 <!-- Modals are containing the forms -->
 <!-- Pagination will be implemented -->
 <!-- Table sorter will be added -->
 <!-- I'll add back end coding later -->
-<!-- Alert be like gmail alert -->
 
 <!DOCTYPE html>
 
@@ -21,6 +19,9 @@
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+		<!-- Style -->
+		<link rel="stylesheet" href="style.css">
+
 		<!-- JQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		
@@ -32,6 +33,9 @@
 
 		<!-- CRUD.js -->
 		<script src="crud.js"></script>
+
+		<!-- SCRIPT.js -->
+		<script src="script.js"></script>
 
 		<style type="text/css">
 			body {
@@ -57,8 +61,11 @@
 			<!-- Header -->
 			<hr>
 			<!-- New user trigger -->
-		  	<button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus-circle"></i> Add</button>
+		  	<button type="button" style="margin-left:5px;" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#newModal"><i class="fa fa-plus-circle"></i> Add</button>
 
+		  	<!-- SnackBar
+		  	<button type="button" class="btn btn-danger btn-lg pull-right" onclick="myFunction()">Snackbar</button>
+		  	-->
 		  	<!-- Myself trigger -->
 		  	<button type="button" class="btn btn-success btn-lg pull-right" data-toggle="modal" data-target="#myselfModal"><i class="fa fa-user"></i> Myself</button>
 
@@ -84,10 +91,13 @@
 		  	<!-- Header -->
 
 		  	<!-- Alert Box -->
+		  	<!--
 			<div class="alert alert-success alert-dismissable" ng-if = "message">
 				<a href="#" class="close" ng-click="clearMessage()" aria-label="close">&times;</a>
 				<strong>Success!</strong> {{message}}
 			</div>
+			-->
+			<div id="snackbar">{{message}}</div>
 
 		  	<!-- Main -->
 		  	
@@ -134,7 +144,7 @@
 		  	<!-- Modals -->
 		  	
 		  	<!--New User Modal -->
-		  	<!-- You can't add an empty user.If you wish to close the newmodal on saving a new instance, you can add data-dismiss in save button. -->
+		  	<!-- You can add an empty user.If you wish to close the newmodal on saving a new instance, you can add data-dismiss in save button. -->
 			<div id="newModal" class="modal fade" role="dialog">
 				<div class="modal-dialog">
 					<!-- Modal content-->
@@ -159,7 +169,7 @@
 							  	</div>
 							  	<div class="form-group">
 							  		<div class="col-sm-offset-2 col-sm-10">
-							  			<button type="submit" class="btn btn-success" ng-click="saveUser()"><i class="fa fa-file"></i> Save</button>
+							  			<button type="submit" data-dismiss="modal" onclick="myFunction()" class="btn btn-success" ng-click="saveUser()"><i class="fa fa-file"></i> Save</button>
 							  		</div>
 							  	</div>
 							</form>
@@ -197,7 +207,7 @@
 							  	</div>
 							  	<div class="form-group">
 							  		<div class="col-sm-offset-2 col-sm-10">
-							  			<button type="submit" ng-click="updateUser()" class="btn btn-success"><i class="fa fa-wrench"></i> Update</button>
+							  			<button type="submit" onclick="myFunction()" data-dismiss="modal" ng-click="updateUser()" class="btn btn-success"><i class="fa fa-wrench"></i> Update</button>
 							  		</div>
 							  	</div>
 							</form>
@@ -222,7 +232,7 @@
 			  				<p style="color:red;">Are You Sure ?</p>
 			  			</div>
 			  			<div class="modal-footer">
-			    			<button type="button" ng-click="deleteUser()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-frown-o"></i> Yes</button>
+			    			<button type="button" onclick="myFunction()" ng-click="deleteUser()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-frown-o"></i> Yes</button>
 			    			<button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-smile-o"></i> No</button>
 			  			</div>
 					</div>

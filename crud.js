@@ -9,7 +9,7 @@ myApp.controller('myController',function($scope){
 
 	//Predefined
 	$scope.users = [
-		{name:'zia',email:'zia.1993.rahman@gmail.com'},
+		{name:'Ziaur Rahman',email:'zia.1993.rahman@gmail.com'},
 		{name:'bindu',email:'bindu1091@gmail.com'},
 		{name:'imran',email:'shahriar.kabir@gmail.com'},
 		{name:'marzan',email:'naziba.marzan@gmail.com'},
