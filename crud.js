@@ -1,20 +1,21 @@
 var myApp = angular.module('myApp',[]);
 
-myApp.controller('myController',function($scope){
-	console.log('Ziaur Rahman');
+myApp.controller('myController',function($scope,$http){
 
 	$scope.newUser = {};
 	$scope.clickedUser = {};
 	$scope.message = '';
 
+	$http.get("crud.php").then(function (response) {$scope.users = response.data;});
+	
 	//Predefined
-	$scope.users = [
-		{name:'Ziaur Rahman',email:'zia.1993.rahman@gmail.com'},
-		{name:'bindu',email:'bindu1091@gmail.com'},
-		{name:'imran',email:'shahriar.kabir@gmail.com'},
-		{name:'marzan',email:'naziba.marzan@gmail.com'},
-		{name:'sumon',email:'gm.bellalhossain@gmail.com'}
-	];
+	// $scope.users = [
+	// 	{name:'Ziaur Rahman',email:'zia.1993.rahman@gmail.com'},
+	// 	{name:'bindu',email:'bindu1091@gmail.com'},
+	// 	{name:'imran',email:'shahriar.kabir@gmail.com'},
+	// 	{name:'marzan',email:'naziba.marzan@gmail.com'},
+	// 	{name:'sumon',email:'gm.bellalhossain@gmail.com'}
+	// ];
 
 	//Adding New user
 	$scope.saveUser = function(){
